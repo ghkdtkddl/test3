@@ -1,0 +1,40 @@
+image restoration
+
+- 퓨리에 스펙트럼 변환-> 모든 주파수 영역이 고르게 나타나는 노이즈
+
+- noise 모델
+	- additive noise vs multiplicative noise 차이
+	- additive noise : 가우스 노이즈, 소금과 후추,  유니폼 노이즈
+	- multiplicative noise : speckle noise, 리시안 노이즈, 감마 노이즈
+
+- noise 모델 설명 후 각 noise에 맞는 filtering 선택 후 비교
+	
+	- additive noise
+	- 가우스 노이즈:가우시안 필터, low-pass filter
+	- 소금 후츠 노이즈 : median 필터, adaptive median 필터
+	- 유니폼 노이즈 : mean 필터, box 필터링
+	
+	- multiplicative noise
+	- speckle noise : lee 필터, frost 필터, gamma map 필터, kuan 필터
+	- rician noise : rician adaptive filter, lee-van vleck filter
+	- gamma noise : gamma filter
+
+- 필터링이 잘 맞는 이유
+
+---- 필터링----
+어떤 노이즈가 있는지 노이즈에 어떤 필터링이 잘 맞는지
+-  노이즈에 필터링이 잘 맞는이유?
+
+motion blur => 카메라 흔들려서 생기는 현상
+---- 딥러닝 ----
+딥러닝 모델 denoising
+
+
+참고사이트
+https://sonsnotation.blogspot.com/2020/12/14-image-restoration.html
+https://everyday-image-processing.tistory.com/168(노이즈 관련)
+https://blog.naver.com/PostView.naver?blogId=pinky118&logNo=150023176120(AWGN설명)
+https://www.cubox.ai/board/research/board_view.php?&page=1&num=24(개념설명)
+https://www.slideshare.net/EngHaitham/image-denoising-44893821
+https://marisara.tistory.com/entry/%ED%8C%8C%EC%9D%B4%EC%8D%AC-openCV-10-%EA%B0%80%EC%9A%B0%EC%8B%9C%EC%95%88-%EB%85%B8%EC%9D%B4%EC%A6%88Gaussian-Noise(가우스노이즈)
+https://blog.naver.com/PostView.naver?blogId=pbsoki&logNo=220948940766&parentCategoryNo=&categoryNo=51&viewDate=&isShowPopularPosts=false&from=postView(노이즈와 필터 설명)

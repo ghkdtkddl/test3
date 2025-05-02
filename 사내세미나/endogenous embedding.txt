@@ -1,0 +1,48 @@
+endogenous embedding
+- timexer의 시간적 변화를 정확히 예측하고자 non-overlap 패치를 사용함
+- endogenous와 exogenous의 역할이 다르므로, 서로 다르게 임베딩을 하기에 직접적인 연결을 하면 정보 불일치 에러가 발생함
+- 각각의 임베딩을 하기 위해 endogenous에서 학습 가능한 global token을 도입하며 패치 단위로 나누고 global token을 임베딩함.
+=> 이는 endogenous 시간 패치로 인과정보를 전달하는데 도움을 줌
+
+
+endogenous embedding
+
+1. 정의
+ - 모델이 예측하려는 타켓 변수
+ - 시계열 데이터를 patch 단위로 나누고 global token을 추가하여 transformer 구조에서 활용
+
+2. 목적
+ - 시간적 종속성 학습
+  => 시계열 데이터의 흐름과 패턴을 효과적으로 캡처
+ - exogenous와 상호작용
+  => exogenous 변수와의 정보 전달 원할하게 함
+ - 전체 시계열 데이터의 대표적인 특징 표현
+  => learnable global token을 사용하여 중요한 정보 학습
+
+3. endogenous embedding 구조
+ 3.1 Patching
+  - 시계열 데이터를 고정된 길이로 patch 분할
+  - 각 patch는 독립적인 시계열 조각으로 변환
+ 3.2 patch embedding
+  - 각 패치를 고정된 차원의 벡터로 변환
+  - position embedding을 추가하여 시간적 순서 정보를 보존(추후 self-attention을 통해 위치정보를 찾아낼수 가 없음_)
+ 3.3 global token 추가
+  - vit class token의 이미지 전체 정보를 요약하여 분류에 활용하는것에서 영감을 받음
+  - learnable global token을 도입하여 endogenous 시계열 전체의 대표적인 정보 학습
+  - exogenous와의 정보 교환시 중앙 허브 역할
+  - 입력 데이터의 패치들과 함께 transformer encoder에 입력됨
+
+4. endogenous embedding에 사용되는 attention mechanism
+ 4-1. self-attention
+  - 각 패치 간의 상호작용을 학습하여 시계열 내 패턴 포착
+  - 긴 시퀀스에서도 멀리 떨어진 데이터 간의 관계를 모델링 가능
+
+ 4.2 cross-attention
+  - exogenous 변수와 global token간의 정보 교환
+  - exogenous 변수가 미치는 영향을 반영함
+
+Endogenous Embedding 흐름도
+📌 Patchify 과정 예시 (Patch 크기 12인 경우 시계열 분할 그림)
+📌 Global Token이 Patch들과 상호작용하는 Attention Mechanism 다이어그램
+📌 Vision Transformer의 Class Token과 비교하는 이미지
+
